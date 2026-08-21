@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Aguante el chileno weon! 
+=======
+Aguante el chileno weon! Es un genio de mierda
+>>>>>>> 86b6b1d3a29b6aa5ad07f0ae88feac986d8db72a
