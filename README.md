@@ -31,8 +31,8 @@ Al ser un sitio web estático de presentación, no requiere variables de entorno
 
 1. **Clonar e instalar:**
    ```bash
-   git clone [https://github.com/usuario/las-condes-hotel.git](https://github.com/usuario/las-condes-hotel.git)
-   cd las-condes-hotel
+   git clone [https://github.com/tomasAITATAGLE/Hoteleria-G3]
+   cd Hoteleria-G3
    npm install
 2. **Crear una rama**
    git checkout -b mi-rama
