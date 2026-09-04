@@ -24,6 +24,36 @@ document.querySelectorAll("img").forEach((image) => {
   });
 });
 
+const liveClock = document.querySelector("[data-live-clock]");
+
+if (liveClock) {
+  const clockHours = liveClock.querySelector("[data-clock-hours]");
+  const clockMinutes = liveClock.querySelector("[data-clock-minutes]");
+  const clockFormatter = new Intl.DateTimeFormat("es-AR", {
+    timeZone: "America/Argentina/Cordoba",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  });
+
+  const updateClock = () => {
+    const now = new Date();
+    const parts = clockFormatter.formatToParts(now);
+    const hour = parts.find((part) => part.type === "hour")?.value ?? "00";
+    const minute = parts.find((part) => part.type === "minute")?.value ?? "00";
+    if (clockHours) clockHours.textContent = hour;
+    if (clockMinutes) clockMinutes.textContent = minute;
+    liveClock.setAttribute("datetime", now.toISOString());
+    liveClock.setAttribute(
+      "aria-label",
+      `Hora actual en Córdoba: ${hour}:${minute}`,
+    );
+  };
+
+  updateClock();
+  window.setInterval(updateClock, 1000);
+}
+
 if (body.classList.contains("intro-page")) {
   const destination = "lobby.html";
   const timer = window.setTimeout(
