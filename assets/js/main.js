@@ -27,6 +27,8 @@ document.querySelectorAll("img").forEach((image) => {
 const liveClock = document.querySelector("[data-live-clock]");
 
 if (liveClock) {
+  const clockHours = liveClock.querySelector("[data-clock-hours]");
+  const clockMinutes = liveClock.querySelector("[data-clock-minutes]");
   const clockFormatter = new Intl.DateTimeFormat("es-AR", {
     timeZone: "America/Argentina/Cordoba",
     hour: "2-digit",
@@ -36,11 +38,15 @@ if (liveClock) {
 
   const updateClock = () => {
     const now = new Date();
-    liveClock.textContent = clockFormatter.format(now);
+    const parts = clockFormatter.formatToParts(now);
+    const hour = parts.find((part) => part.type === "hour")?.value ?? "00";
+    const minute = parts.find((part) => part.type === "minute")?.value ?? "00";
+    if (clockHours) clockHours.textContent = hour;
+    if (clockMinutes) clockMinutes.textContent = minute;
     liveClock.setAttribute("datetime", now.toISOString());
     liveClock.setAttribute(
       "aria-label",
-      `Hora actual en Córdoba: ${clockFormatter.format(now)}`,
+      `Hora actual en Córdoba: ${hour}:${minute}`,
     );
   };
 

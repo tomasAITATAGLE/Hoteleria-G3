@@ -7,7 +7,7 @@
   --ink: #10130f;
   --muted: #777166;
   --serif: "Cormorant Garamond", Georgia, serif;
-  --sans: "Jost", Arial, sans-serif;
+  --sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --ease: cubic-bezier(0.76, 0, 0.24, 1);
 }
 * {
@@ -288,7 +288,9 @@ img {
   color: var(--gold);
 }
 .lobby-time {
-  min-width: 5.35ch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 13px 0 20px;
   font:
     300 clamp(6.5rem, 12vw, 10rem)/0.82 "Montserrat",
@@ -298,6 +300,10 @@ img {
   font-variant-numeric: tabular-nums lining-nums;
   letter-spacing: -0.07em;
   text-align: center;
+}
+.lobby-time__separator {
+  display: inline-block;
+  margin-inline: 0.1em 0.14em;
 }
 .lobby-cta {
   width: min(340px, calc(100% - 40px));
