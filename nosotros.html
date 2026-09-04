@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sobre nosotros — Las Condes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Jost:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="dark-page">
+    <header class="site-header">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-controls="site-menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <a class="site-logo" href="lobby.html"
+        ><span class="brand-mark brand-mark--white"></span
+      ></a>
+      <a class="button button--gold" href="reservas.html">Reservar</a>
+    </header>
+    <main class="about container reveal">
+      <header class="section-heading">
+        <span></span>
+        <p>Sobre nosotros</p>
+        <span></span>
+      </header>
+      <figure class="about__image">
+        <img
+          src="assets/images/hotel-aerial.png"
+          alt="Vista aérea de Las Condes Hotel & Golf Club"
+        />
+      </figure>
+      <p class="about__lead">
+        Ubicado en el corazón del valle de Ascochinga, Las Condes Hotel & Golf
+        Club es un refugio donde la sofisticación se encuentra con la
+        naturaleza.
+      </p>
+      <div class="ornament" aria-hidden="true">
+        <span></span><i></i><span></span>
+      </div>
+      <p class="about__copy">
+        Nos enamoramos del silencio y la energía de Ascochinga, y decidimos
+        forjar un refugio para compartir esa paz.
+      </p>
+    </main>
+    <div class="menu-backdrop" data-menu-close></div>
+    <nav class="drawer" id="site-menu" aria-label="Navegación principal">
+      <button
+        class="drawer__close"
+        type="button"
+        data-menu-close
+        aria-label="Cerrar menú"
+      >
+        ×
+      </button>
+      <p class="drawer__eyebrow">Las Condes</p>
+      <a href="lobby.html">Inicio</a><a href="nosotros.html">Sobre nosotros</a
+      ><a href="reservas.html">Habitaciones</a
+      ><a href="reservas.html">Reservas</a
+      ><a href="#" aria-disabled="true">Contacto</a>
+    </nav>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
