@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Habitaciones & Suites — Las Condes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Jost:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="reservations-page">
+    <header class="site-header">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-controls="site-menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <a class="site-logo" href="lobby.html"
+        ><span class="brand-mark brand-mark--white"></span
+      ></a>
+      <a class="button button--gold" href="reservas.html">Reservar</a>
+    </header>
+    <main>
+      <section class="booking-hero reveal">
+        <h1>Reserva tu estadía</h1>
+        <div class="booking-bar" aria-label="Datos de estadía">
+          <div><span>Llegada</span><strong>Vie, 28 ago</strong></div>
+          <div><span>Salida</span><strong>Sáb, 29 ago</strong></div>
+          <div><span>Huéspedes</span><strong>1 adulto</strong></div>
+          <button type="button">Buscar</button>
+        </div>
+      </section>
+      <section class="rooms container" aria-label="Habitaciones disponibles">
+        <a class="room-card reveal" href="habitacion.html">
+          <figure>
+            <img
+              src="assets/images/room-suite-fairway.png"
+              alt="Suite Fairway con vista al campo de golf"
+            />
+          </figure>
+          <div>
+            <h2>Suite Fairway</h2>
+            <p>Vista al green · 45 m²</p>
+            <strong>$185.000 <span>/ noche</span></strong>
+          </div>
+        </a>
+        <a class="room-card reveal" href="habitacion.html">
+          <figure>
+            <img
+              src="assets/images/room-sierra-deluxe.png"
+              alt="Habitación Sierra Deluxe con vista a las sierras"
+            />
+          </figure>
+          <div>
+            <h2>Habitación Sierra Deluxe</h2>
+            <p>Vista a las sierras · 32 m²</p>
+            <strong>$132.000 <span>/ noche</span></strong>
+          </div>
+        </a>
+        <a class="room-card reveal" href="habitacion.html">
+          <figure>
+            <img
+              src="assets/images/room-presidential-lc.png"
+              alt="Suite Presidencial LC con salón y hogar a leña"
+            />
+          </figure>
+          <div>
+            <h2>Suite Presidencial LC</h2>
+            <p>Vista panorámica · 78 m²</p>
+            <strong>$310.000 <span>/ noche</span></strong>
+          </div>
+        </a>
+      </section>
+    </main>
+    <footer class="footer-tagline">Elegancia. Exclusividad. Tradición.</footer>
+    <div class="menu-backdrop" data-menu-close></div>
+    <nav class="drawer" id="site-menu" aria-label="Navegación principal">
+      <button
+        class="drawer__close"
+        type="button"
+        data-menu-close
+        aria-label="Cerrar menú"
+      >
+        ×
+      </button>
+      <p class="drawer__eyebrow">Las Condes</p>
+      <a href="lobby.html">Inicio</a><a href="nosotros.html">Sobre nosotros</a
+      ><a href="reservas.html">Habitaciones</a
+      ><a href="reservas.html">Reservas</a
+      ><a href="#" aria-disabled="true">Contacto</a>
+    </nav>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

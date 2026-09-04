@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Las Condes Suite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Jost:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="room-detail-page">
+    <header class="site-header site-header--overlay">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-controls="site-menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <a class="site-logo" href="lobby.html"
+        ><span class="brand-mark brand-mark--white"></span
+      ></a>
+      <a class="button button--gold" href="reservas.html">Reservar</a>
+    </header>
+    <main>
+      <figure class="detail-hero">
+        <img
+          src="assets/images/room-suite-fairway.png"
+          alt="Interior de Las Condes Suite"
+        />
+      </figure>
+      <article class="detail container reveal">
+        <nav class="breadcrumb" aria-label="Migas de pan">
+          <a href="lobby.html">Inicio</a><span>›</span
+          ><a href="reservas.html">Habitaciones y Suites</a><span>›</span
+          ><strong>Las Condes Suite</strong>
+        </nav>
+        <div class="detail__heading">
+          <div>
+            <p class="eyebrow eyebrow--gold">Suite insignia</p>
+            <h1>Las Condes Suite</h1>
+            <p>90 m² · 2/3 plazas · Hasta 3 huéspedes</p>
+          </div>
+          <div class="detail__price">
+            <strong>$12.000</strong
+            ><small>Agosto 28 - Agosto 30, 2026 / 1 huésped</small
+            ><a class="button button--dark" href="reservas.html">Seleccionar</a>
+          </div>
+        </div>
+        <p class="detail__copy">
+          Nuestra suite más exclusiva combina la elegancia de un refugio privado
+          con el confort y el lujo de un hotel de primer nivel. Sus amplios
+          espacios y materiales nobles crean una atmósfera cálida y sofisticada,
+          mientras que sus grandes ventanales ofrecen una vista privilegiada de
+          las sierras y del campo de golf. Una experiencia única, donde la
+          naturaleza y la elegancia se encuentran.
+        </p>
+      </article>
+    </main>
+    <div class="menu-backdrop" data-menu-close></div>
+    <nav class="drawer" id="site-menu" aria-label="Navegación principal">
+      <button
+        class="drawer__close"
+        type="button"
+        data-menu-close
+        aria-label="Cerrar menú"
+      >
+        ×
+      </button>
+      <p class="drawer__eyebrow">Las Condes</p>
+      <a href="lobby.html">Inicio</a><a href="nosotros.html">Sobre nosotros</a
+      ><a href="reservas.html">Habitaciones</a
+      ><a href="reservas.html">Reservas</a
+      ><a href="#" aria-disabled="true">Contacto</a>
+    </nav>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
