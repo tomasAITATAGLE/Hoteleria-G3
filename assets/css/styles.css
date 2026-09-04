@@ -410,7 +410,7 @@ img {
   grid-template-columns: repeat(3, 1fr) 156px;
   text-align: left;
 }
-.booking-bar div {
+.booking-bar label {
   padding: 10px 20px;
   border-right: 1px solid rgba(200, 169, 107, 0.25);
 }
@@ -421,10 +421,22 @@ img {
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-.booking-bar strong {
+.booking-bar input,
+.booking-bar select {
   display: block;
+  width: 100%;
   margin-top: 3px;
-  font: 400 0.9rem var(--serif);
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 500 0.72rem var(--sans);
+  color-scheme: light;
+}
+.booking-bar input:focus,
+.booking-bar select:focus {
+  color: #80652e;
 }
 .booking-bar button {
   border: 10px solid var(--ivory);
@@ -534,6 +546,10 @@ img {
   gap: 4px 24px;
   align-items: center;
 }
+.detail__price small[data-booking-summary] {
+  grid-column: 1;
+  color: var(--muted);
+}
 .detail__price strong {
   font: 500 1.8rem var(--serif);
 }
@@ -549,6 +565,23 @@ img {
   margin: 64px auto 0;
   font: 400 1.25rem/1.6 var(--serif);
   text-align: center;
+}
+.detail__amenities {
+  max-width: 900px;
+  margin: 42px auto 0;
+  padding: 28px 0 0;
+  border-top: 1px solid rgba(200, 169, 107, 0.45);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 40px;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.detail__amenities li::before {
+  content: "◇";
+  margin-right: 10px;
+  color: var(--gold);
 }
 .reveal {
   animation: fadeUp 0.9s both;
@@ -638,7 +671,7 @@ img {
   .booking-bar {
     grid-template-columns: 1fr;
   }
-  .booking-bar div {
+  .booking-bar label {
     border-bottom: 1px solid rgba(200, 169, 107, 0.25);
   }
   .detail__price {
