@@ -132,6 +132,39 @@ if (bookingSummary) {
   }
 }
 
+document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+  const slides = [...carousel.querySelectorAll(".detail-carousel__slide")];
+  const dots = [...carousel.querySelectorAll("[data-carousel-dot]")];
+  let currentSlide = 0;
+
+  const showSlide = (index) => {
+    currentSlide = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === currentSlide);
+    });
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === currentSlide;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-current", isActive ? "true" : "false");
+    });
+  };
+
+  carousel
+    .querySelector("[data-carousel-prev]")
+    ?.addEventListener("click", () => showSlide(currentSlide - 1));
+  carousel
+    .querySelector("[data-carousel-next]")
+    ?.addEventListener("click", () => showSlide(currentSlide + 1));
+  dots.forEach((dot, index) =>
+    dot.addEventListener("click", () => showSlide(index)),
+  );
+  carousel.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") showSlide(currentSlide - 1);
+    if (event.key === "ArrowRight") showSlide(currentSlide + 1);
+  });
+  showSlide(0);
+});
+
 if (body.classList.contains("intro-page")) {
   const destination = "lobby.html";
   const timer = window.setTimeout(

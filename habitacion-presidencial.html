@@ -29,12 +29,66 @@
       <a class="button button--gold" href="reservas.html">Reservar</a>
     </header>
     <main>
-      <figure class="detail-hero">
-        <img
-          src="assets/images/room-presidential-lc.png"
-          alt="Suite Presidencial LC con salón y hogar a leña"
-        />
-      </figure>
+      <section
+        class="detail-carousel"
+        data-carousel
+        aria-label="Galería de Suite Presidencial LC"
+      >
+        <div class="detail-carousel__track">
+          <figure class="detail-carousel__slide is-active">
+            <img
+              src="assets/images/room-presidential-lc.png"
+              alt="Dormitorio de Suite Presidencial LC"
+            />
+          </figure>
+          <figure class="detail-carousel__slide">
+            <img
+              src="assets/images/room-presidential-lounge.png"
+              alt="Salón privado con hogar de Suite Presidencial LC"
+            />
+          </figure>
+          <figure class="detail-carousel__slide">
+            <img
+              src="assets/images/room-presidential-bath.png"
+              alt="Baño principal de Suite Presidencial LC"
+            />
+          </figure>
+        </div>
+        <button
+          class="detail-carousel__arrow detail-carousel__arrow--prev"
+          type="button"
+          data-carousel-prev
+          aria-label="Imagen anterior"
+        >
+          ‹
+        </button>
+        <button
+          class="detail-carousel__arrow detail-carousel__arrow--next"
+          type="button"
+          data-carousel-next
+          aria-label="Imagen siguiente"
+        >
+          ›
+        </button>
+        <div class="detail-carousel__dots" aria-label="Elegir imagen">
+          <button
+            class="is-active"
+            type="button"
+            data-carousel-dot="0"
+            aria-label="Ver imagen 1"
+          ></button
+          ><button
+            type="button"
+            data-carousel-dot="1"
+            aria-label="Ver imagen 2"
+          ></button
+          ><button
+            type="button"
+            data-carousel-dot="2"
+            aria-label="Ver imagen 3"
+          ></button>
+        </div>
+      </section>
       <article class="detail container reveal">
         <nav class="breadcrumb" aria-label="Migas de pan">
           <a href="lobby.html">Inicio</a><span>›</span
