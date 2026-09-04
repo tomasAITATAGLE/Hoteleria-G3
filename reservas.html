@@ -31,15 +31,29 @@
     <main>
       <section class="booking-hero">
         <h1>Reserva tu estadía</h1>
-        <div class="booking-bar" aria-label="Datos de estadía">
-          <div><span>Llegada</span><strong>Vie, 28 ago</strong></div>
-          <div><span>Salida</span><strong>Sáb, 29 ago</strong></div>
-          <div><span>Huéspedes</span><strong>1 adulto</strong></div>
-          <button type="button">Buscar</button>
-        </div>
+        <form class="booking-bar" data-booking-form>
+          <label>
+            <span>Llegada</span>
+            <input type="date" name="llegada" required />
+          </label>
+          <label>
+            <span>Salida</span>
+            <input type="date" name="salida" required />
+          </label>
+          <label>
+            <span>Huéspedes</span>
+            <select name="huespedes" aria-label="Cantidad de huéspedes">
+              <option value="1">1 adulto</option>
+              <option value="2">2 adultos</option>
+              <option value="3">3 huéspedes</option>
+              <option value="4">4 huéspedes</option>
+            </select>
+          </label>
+          <button type="submit">Buscar</button>
+        </form>
       </section>
       <section class="rooms container" aria-label="Habitaciones disponibles">
-        <a class="room-card" href="habitacion.html">
+        <a class="room-card" href="habitacion.html" data-room-link>
           <figure>
             <img
               src="assets/images/room-suite-fairway.png"
@@ -52,7 +66,7 @@
             <strong>$185.000 <span>/ noche</span></strong>
           </div>
         </a>
-        <a class="room-card" href="habitacion.html">
+        <a class="room-card" href="habitacion-sierra.html" data-room-link>
           <figure>
             <img
               src="assets/images/room-sierra-deluxe.png"
@@ -65,7 +79,7 @@
             <strong>$132.000 <span>/ noche</span></strong>
           </div>
         </a>
-        <a class="room-card" href="habitacion.html">
+        <a class="room-card" href="habitacion-presidencial.html" data-room-link>
           <figure>
             <img
               src="assets/images/room-presidential-lc.png"
