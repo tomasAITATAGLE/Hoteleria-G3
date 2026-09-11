@@ -21,3 +21,4 @@ python -m http.server 8000 --directory hotel-web
 ```
 
 Luego visitar `http://localhost:8000`.
+https://hoteleria-g3.vercel.app/
