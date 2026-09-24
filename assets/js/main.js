@@ -165,6 +165,136 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   showSlide(0);
 });
 
+const AUTH_USERS_KEY = "lc_users";
+const AUTH_SESSION_KEY = "lc_session";
+
+function getUsers() {
+  try {
+    return JSON.parse(window.localStorage.getItem(AUTH_USERS_KEY)) ?? [];
+  } catch {
+    return [];
+  }
+}
+
+function saveUsers(users) {
+  window.localStorage.setItem(AUTH_USERS_KEY, JSON.stringify(users));
+}
+
+function getSession() {
+  try {
+    return JSON.parse(window.localStorage.getItem(AUTH_SESSION_KEY));
+  } catch {
+    return null;
+  }
+}
+
+function setSession(user) {
+  window.localStorage.setItem(
+    AUTH_SESSION_KEY,
+    JSON.stringify({ nombre: user.nombre, email: user.email }),
+  );
+}
+
+function clearSession() {
+  window.localStorage.removeItem(AUTH_SESSION_KEY);
+}
+
+function setFieldError(form, fieldName, hasError) {
+  form
+    .querySelector(`[data-login-field="${fieldName}"], [data-register-field="${fieldName}"]`)
+    ?.classList.toggle("login-field--error", hasError);
+}
+
+function showFormError(errorElement, message) {
+  if (!errorElement) return;
+  errorElement.textContent = message;
+  errorElement.hidden = !message;
+}
+
+document.querySelectorAll("[data-auth-link]").forEach((link) => {
+  const session = getSession();
+  if (session) {
+    link.textContent = `Cerrar sesión (${session.nombre.split(" ")[0]})`;
+    link.setAttribute("href", "#");
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      clearSession();
+      window.location.href = "lobby.html";
+    });
+  } else {
+    link.textContent = "Iniciar sesión";
+    link.setAttribute("href", "login.html");
+  }
+});
+
+const loginForm = document.querySelector("[data-login-form]");
+
+if (loginForm) {
+  const errorElement = loginForm.querySelector("[data-login-error]");
+  loginForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const email = loginForm.elements.email.value.trim().toLowerCase();
+    const password = loginForm.elements.password.value;
+    setFieldError(loginForm, "email", false);
+    setFieldError(loginForm, "password", false);
+    showFormError(errorElement, "");
+
+    const user = getUsers().find((candidate) => candidate.email === email);
+    if (!user || user.password !== password) {
+      setFieldError(loginForm, "email", true);
+      setFieldError(loginForm, "password", true);
+      showFormError(errorElement, "Correo o contraseña incorrectos.");
+      return;
+    }
+
+    setSession(user);
+    window.location.href = "lobby.html";
+  });
+}
+
+const registerForm = document.querySelector("[data-register-form]");
+
+if (registerForm) {
+  const errorElement = registerForm.querySelector("[data-register-error]");
+  registerForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const nombre = registerForm.elements.nombre.value.trim();
+    const email = registerForm.elements.email.value.trim().toLowerCase();
+    const password = registerForm.elements.password.value;
+    const confirm = registerForm.elements.confirm.value;
+    ["nombre", "email", "password", "confirm"].forEach((field) =>
+      setFieldError(registerForm, field, false),
+    );
+    showFormError(errorElement, "");
+
+    if (!nombre || !email || !password || !confirm) {
+      showFormError(errorElement, "Completá todos los campos.");
+      return;
+    }
+    if (password.length < 6) {
+      setFieldError(registerForm, "password", true);
+      showFormError(errorElement, "La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+    if (password !== confirm) {
+      setFieldError(registerForm, "password", true);
+      setFieldError(registerForm, "confirm", true);
+      showFormError(errorElement, "Las contraseñas no coinciden.");
+      return;
+    }
+    if (getUsers().some((candidate) => candidate.email === email)) {
+      setFieldError(registerForm, "email", true);
+      showFormError(errorElement, "Ya existe una cuenta con ese correo.");
+      return;
+    }
+
+    const user = { nombre, email, password };
+    saveUsers([...getUsers(), user]);
+    setSession(user);
+    window.location.href = "lobby.html";
+  });
+}
+
 if (body.classList.contains("intro-page")) {
   const destination = "lobby.html";
   const timer = window.setTimeout(
