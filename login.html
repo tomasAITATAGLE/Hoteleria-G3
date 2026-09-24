@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Iniciá sesión en Las Condes Hotel & Golf Club." />
+    <title>Iniciar sesión — Las Condes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="login-page">
+    <header class="site-header site-header--overlay">
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-controls="site-menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <a class="site-logo" href="lobby.html"
+        ><span class="brand-mark brand-mark--white"></span
+      ></a>
+      <a class="button button--gold" href="reservas.html">Reservar</a>
+    </header>
+    <main class="login-main">
+      <section class="login-card reveal" aria-labelledby="login-title">
+        <p class="eyebrow eyebrow--gold">Las Condes</p>
+        <h1 id="login-title">Iniciar sesión</h1>
+        <p class="login-card__sub">
+          Accedé a tu cuenta para gestionar tus reservas.
+        </p>
+        <form class="login-form" data-login-form novalidate>
+          <p class="login-error" data-login-error hidden></p>
+          <label class="login-field" data-login-field="email">
+            <span>Correo electrónico</span>
+            <input
+              type="email"
+              name="email"
+              placeholder="nombre@correo.com"
+              autocomplete="email"
+              required
+            />
+          </label>
+          <label class="login-field" data-login-field="password">
+            <span>Contraseña</span>
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+          </label>
+          <div class="login-options">
+            <label>
+              <input type="checkbox" name="recordarme" />
+              Recordarme
+            </label>
+            <a href="#">¿Olvidaste tu contraseña?</a>
+          </div>
+          <button class="login-submit" type="submit">Ingresar</button>
+        </form>
+        <p class="login-footer">
+          ¿No tenés cuenta? <a href="registro.html">Creá una aquí</a>
+        </p>
+      </section>
+    </main>
+    <footer class="footer-tagline">Elegancia. Exclusividad. Tradición.</footer>
+    <div class="menu-backdrop" data-menu-close></div>
+    <nav class="drawer" id="site-menu" aria-label="Navegación principal">
+      <button
+        class="drawer__close"
+        type="button"
+        data-menu-close
+        aria-label="Cerrar menú"
+      >
+        ×
+      </button>
+      <p class="drawer__eyebrow">Las Condes</p>
+      <a href="lobby.html">Inicio</a><a href="nosotros.html">Sobre nosotros</a
+      ><a href="reservas.html">Habitaciones</a
+      ><a href="reservas.html">Reservas</a
+      ><a href="#" aria-disabled="true">Contacto</a
+      ><a href="login.html" data-auth-link>Iniciar sesión</a>
+    </nav>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
