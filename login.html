@@ -36,7 +36,7 @@
         <p class="login-card__sub">
           Accedé a tu cuenta para gestionar tus reservas.
         </p>
-        <form class="login-form" data-login-form novalidate>
+        <form class="login-form" data-login-form autocomplete="off" novalidate>
           <p class="login-error" data-login-error hidden></p>
           <label class="login-field" data-login-field="email">
             <span>Correo electrónico</span>
@@ -44,7 +44,7 @@
               type="email"
               name="email"
               placeholder="nombre@correo.com"
-              autocomplete="email"
+              autocomplete="off"
               required
             />
           </label>
@@ -54,7 +54,7 @@
               type="password"
               name="password"
               placeholder="••••••••"
-              autocomplete="current-password"
+              autocomplete="off"
               required
             />
           </label>
