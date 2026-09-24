@@ -296,12 +296,12 @@ if (registerForm) {
 }
 
 if (body.classList.contains("intro-page")) {
-  const destination = "lobby.html";
+  const destination = getSession() ? "lobby.html" : "login.html";
+  const enterLink = document.querySelector(".intro__enter");
+  enterLink?.setAttribute("href", destination);
   const timer = window.setTimeout(
     () => (window.location.href = destination),
     4200,
   );
-  document
-    .querySelector(".intro__enter")
-    ?.addEventListener("click", () => window.clearTimeout(timer));
+  enterLink?.addEventListener("click", () => window.clearTimeout(timer));
 }
