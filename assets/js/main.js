@@ -211,6 +211,22 @@ function showFormError(errorElement, message) {
   errorElement.hidden = !message;
 }
 
+function getRedirectDestination() {
+  const target = new URLSearchParams(window.location.search).get("redirect");
+  return target && /^[a-zA-Z0-9_-]+\.html$/.test(target) ? target : "lobby.html";
+}
+
+const authCrossLink = document.querySelector("[data-auth-cross-link]");
+
+if (authCrossLink) {
+  const redirect = new URLSearchParams(window.location.search).get("redirect");
+  if (redirect) {
+    const url = new URL(authCrossLink.getAttribute("href"), window.location.href);
+    url.searchParams.set("redirect", redirect);
+    authCrossLink.setAttribute("href", `${url.pathname}${url.search}`);
+  }
+}
+
 document.querySelectorAll("[data-auth-link]").forEach((link) => {
   const session = getSession();
   if (session) {
@@ -248,7 +264,7 @@ if (loginForm) {
     }
 
     setSession(user);
-    window.location.href = "lobby.html";
+    window.location.href = getRedirectDestination();
   });
 }
 
@@ -291,17 +307,17 @@ if (registerForm) {
     const user = { nombre, email, password };
     saveUsers([...getUsers(), user]);
     setSession(user);
-    window.location.href = "lobby.html";
+    window.location.href = getRedirectDestination();
   });
 }
 
 if (body.classList.contains("intro-page")) {
-  const destination = "lobby.html";
+  const destination = getSession() ? "lobby.html" : "login.html";
+  const enterLink = document.querySelector(".intro__enter");
+  enterLink?.setAttribute("href", destination);
   const timer = window.setTimeout(
     () => (window.location.href = destination),
     4200,
   );
-  document
-    .querySelector(".intro__enter")
-    ?.addEventListener("click", () => window.clearTimeout(timer));
+  enterLink?.addEventListener("click", () => window.clearTimeout(timer));
 }
