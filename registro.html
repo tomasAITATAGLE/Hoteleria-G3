@@ -36,7 +36,7 @@
         <p class="login-card__sub">
           Registrate para reservar y gestionar tu estadía.
         </p>
-        <form class="login-form" data-register-form novalidate>
+        <form class="login-form" data-register-form autocomplete="off" novalidate>
           <p class="login-error" data-register-error hidden></p>
           <label class="login-field" data-register-field="nombre">
             <span>Nombre completo</span>
@@ -44,7 +44,7 @@
               type="text"
               name="nombre"
               placeholder="Tu nombre"
-              autocomplete="name"
+              autocomplete="off"
               required
             />
           </label>
@@ -54,7 +54,7 @@
               type="email"
               name="email"
               placeholder="nombre@correo.com"
-              autocomplete="email"
+              autocomplete="off"
               required
             />
           </label>
@@ -64,7 +64,7 @@
               type="password"
               name="password"
               placeholder="Mínimo 6 caracteres"
-              autocomplete="new-password"
+              autocomplete="off"
               required
             />
           </label>
@@ -74,14 +74,15 @@
               type="password"
               name="confirm"
               placeholder="••••••••"
-              autocomplete="new-password"
+              autocomplete="off"
               required
             />
           </label>
           <button class="login-submit" type="submit">Crear cuenta</button>
         </form>
         <p class="login-footer">
-          ¿Ya tenés cuenta? <a href="login.html">Iniciar sesión</a>
+          ¿Ya tenés cuenta?
+          <a href="login.html" data-auth-cross-link>Iniciar sesión</a>
         </p>
       </section>
     </main>
