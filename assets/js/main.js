@@ -61,9 +61,16 @@ if (bookingForm) {
   const departure = bookingForm.elements.salida;
   const guests = bookingForm.elements.huespedes;
   const roomLinks = document.querySelectorAll("[data-room-link]");
+  const arrivalDisplay = bookingForm.querySelector('[data-date-display="llegada"]');
+  const departureDisplay = bookingForm.querySelector('[data-date-display="salida"]');
   const toISODate = (date) => {
     const offset = date.getTimezoneOffset();
     return new Date(date.getTime() - offset * 60000).toISOString().slice(0, 10);
+  };
+  const toDisplayDate = (isoValue) => {
+    if (!isoValue) return "";
+    const [year, month, day] = isoValue.split("-");
+    return `${day}/${month}/${year}`;
   };
   const addDays = (date, days) => {
     const next = new Date(date);
@@ -73,6 +80,11 @@ if (bookingForm) {
   const today = new Date();
   arrival.min = toISODate(today);
   arrival.value ||= toISODate(addDays(today, 7));
+
+  const syncDateDisplays = () => {
+    arrivalDisplay.textContent = toDisplayDate(arrival.value);
+    departureDisplay.textContent = toDisplayDate(departure.value);
+  };
 
   const syncDeparture = () => {
     const minimumDeparture = addDays(new Date(`${arrival.value}T12:00:00`), 1);
@@ -100,11 +112,16 @@ if (bookingForm) {
 
   syncDeparture();
   syncRoomLinks();
+  syncDateDisplays();
   arrival.addEventListener("change", () => {
     syncDeparture();
     syncRoomLinks();
+    syncDateDisplays();
   });
-  departure.addEventListener("change", syncRoomLinks);
+  departure.addEventListener("change", () => {
+    syncRoomLinks();
+    syncDateDisplays();
+  });
   guests.addEventListener("change", syncRoomLinks);
   bookingForm.addEventListener("submit", (event) => {
     event.preventDefault();
