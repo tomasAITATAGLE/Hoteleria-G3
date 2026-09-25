@@ -435,6 +435,36 @@ img {
 .booking-bar select:focus {
   color: #80652e;
 }
+.booking-bar .date-field {
+  position: relative;
+  margin-top: 3px;
+}
+.booking-bar .date-field input {
+  margin-top: 0;
+  color: transparent;
+}
+.booking-bar .date-field input::-webkit-datetime-edit,
+.booking-bar .date-field input::-webkit-datetime-edit-fields-wrapper,
+.booking-bar .date-field input::-webkit-datetime-edit-text,
+.booking-bar .date-field input::-webkit-datetime-edit-day-field,
+.booking-bar .date-field input::-webkit-datetime-edit-month-field,
+.booking-bar .date-field input::-webkit-datetime-edit-year-field {
+  color: transparent;
+}
+.booking-bar .date-field input:focus {
+  color: transparent;
+}
+.booking-bar .date-field__value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  color: var(--ink);
+  font: 500 0.72rem var(--sans);
+  text-transform: none;
+  letter-spacing: normal;
+  pointer-events: none;
+}
 .booking-bar button {
   border: 10px solid var(--ivory);
   background: var(--green);

@@ -43,11 +43,17 @@
         <form class="booking-bar" data-booking-form>
           <label>
             <span>Llegada</span>
-            <input type="date" name="llegada" required />
+            <span class="date-field">
+              <input type="date" name="llegada" required />
+              <span class="date-field__value" data-date-display="llegada" aria-hidden="true"></span>
+            </span>
           </label>
           <label>
             <span>Salida</span>
-            <input type="date" name="salida" required />
+            <span class="date-field">
+              <input type="date" name="salida" required />
+              <span class="date-field__value" data-date-display="salida" aria-hidden="true"></span>
+            </span>
           </label>
           <label>
             <span>Huéspedes</span>
