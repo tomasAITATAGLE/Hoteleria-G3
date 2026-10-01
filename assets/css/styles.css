@@ -381,6 +381,24 @@ img {
   background: var(--gold);
   transform: rotate(45deg);
 }
+.about__amenities {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 40px;
+  text-align: left;
+  color: rgba(245, 242, 233, 0.58);
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+.about__amenities li::before {
+  content: "◇";
+  margin-right: 10px;
+  color: var(--gold);
+}
 .reservations-page {
   background: var(--ivory);
 }
@@ -888,6 +906,9 @@ img {
     border-bottom: 1px solid rgba(200, 169, 107, 0.25);
   }
   .detail__amenities {
+    grid-template-columns: 1fr;
+  }
+  .about__amenities {
     grid-template-columns: 1fr;
   }
   .detail__price {
