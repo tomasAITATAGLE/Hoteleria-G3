@@ -322,8 +322,16 @@ img {
 }
 .dark-page {
   min-height: 100svh;
+  display: flex;
+  flex-direction: column;
   background: var(--green);
   color: var(--ivory);
+}
+.dark-page main {
+  flex: 1 0 auto;
+}
+.dark-page .footer-tagline {
+  flex-shrink: 0;
 }
 .about {
   padding-bottom: 50px;
@@ -387,7 +395,8 @@ img {
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, max-content);
+  justify-content: center;
   gap: 14px 40px;
   text-align: left;
   color: rgba(245, 242, 233, 0.58);
@@ -401,6 +410,15 @@ img {
 }
 .reservations-page {
   background: var(--ivory);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.reservations-page main {
+  flex: 1 0 auto;
+}
+.reservations-page .footer-tagline {
+  flex-shrink: 0;
 }
 .booking-hero {
   height: 134px;
@@ -551,6 +569,17 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.27em;
   font-size: 0.62rem;
+}
+.room-detail-page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.room-detail-page main {
+  flex: 1 0 auto;
+}
+.room-detail-page .footer-tagline {
+  flex-shrink: 0;
 }
 .detail-carousel {
   position: relative;
