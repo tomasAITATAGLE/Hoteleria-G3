@@ -395,7 +395,8 @@ img {
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, max-content);
+  justify-content: center;
   gap: 14px 40px;
   text-align: left;
   color: rgba(245, 242, 233, 0.58);
