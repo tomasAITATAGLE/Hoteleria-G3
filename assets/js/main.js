@@ -260,6 +260,14 @@ document.querySelectorAll("[data-auth-link]").forEach((link) => {
   }
 });
 
+document.querySelectorAll("[data-requires-auth]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (getSession()) return;
+    event.preventDefault();
+    window.location.href = `login.html?redirect=${link.getAttribute("href")}`;
+  });
+});
+
 const loginForm = document.querySelector("[data-login-form]");
 
 if (loginForm) {
@@ -329,9 +337,8 @@ if (registerForm) {
 }
 
 if (body.classList.contains("intro-page")) {
-  const destination = getSession() ? "lobby.html" : "login.html";
+  const destination = "lobby.html";
   const enterLink = document.querySelector(".intro__enter");
-  enterLink?.setAttribute("href", destination);
   const timer = window.setTimeout(
     () => (window.location.href = destination),
     4200,
