@@ -329,9 +329,8 @@ if (registerForm) {
 }
 
 if (body.classList.contains("intro-page")) {
-  const destination = getSession() ? "lobby.html" : "login.html";
+  const destination = "lobby.html";
   const enterLink = document.querySelector(".intro__enter");
-  enterLink?.setAttribute("href", destination);
   const timer = window.setTimeout(
     () => (window.location.href = destination),
     4200,
