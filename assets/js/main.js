@@ -260,6 +260,14 @@ document.querySelectorAll("[data-auth-link]").forEach((link) => {
   }
 });
 
+document.querySelectorAll("[data-requires-auth]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (getSession()) return;
+    event.preventDefault();
+    window.location.href = `login.html?redirect=${link.getAttribute("href")}`;
+  });
+});
+
 const loginForm = document.querySelector("[data-login-form]");
 
 if (loginForm) {
