@@ -1,347 +1,289 @@
-const body = document.body;
-const menuButton = document.querySelector(".menu-toggle");
-const closeButtons = document.querySelectorAll("[data-menu-close]");
+// ===== Menú lateral =====
+const botonMenu = document.querySelector(".boton-menu");
 
-function setMenu(open) {
-  body.classList.toggle("menu-open", open);
-  menuButton?.setAttribute("aria-expanded", String(open));
+function abrirMenu() {
+  document.body.classList.add("menu-abierto");
 }
 
-menuButton?.addEventListener("click", () =>
-  setMenu(!body.classList.contains("menu-open")),
-);
-closeButtons.forEach((button) =>
-  button.addEventListener("click", () => setMenu(false)),
-);
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") setMenu(false);
-});
+function cerrarMenu() {
+  document.body.classList.remove("menu-abierto");
+}
 
-document.querySelectorAll("img").forEach((image) => {
-  image.addEventListener("error", () => {
-    image.hidden = true;
-    image.parentElement?.classList.add("is-missing-image");
+if (botonMenu) {
+  botonMenu.addEventListener("click", abrirMenu);
+  document.querySelector(".cerrar-menu").addEventListener("click", cerrarMenu);
+  document.querySelector(".fondo-menu").addEventListener("click", cerrarMenu);
+  document.addEventListener("keydown", function (evento) {
+    if (evento.key === "Escape") cerrarMenu();
   });
-});
+}
 
-const liveClock = document.querySelector("[data-live-clock]");
+// ===== Portada: pasa sola al lobby después de unos segundos =====
+const linkEntrar = document.getElementById("entrar");
 
-if (liveClock) {
-  const clockHours = liveClock.querySelector("[data-clock-hours]");
-  const clockMinutes = liveClock.querySelector("[data-clock-minutes]");
-  const clockFormatter = new Intl.DateTimeFormat("es-AR", {
+if (linkEntrar) {
+  const temporizador = setTimeout(function () {
+    window.location.href = "lobby.html";
+  }, 4200);
+  linkEntrar.addEventListener("click", function () {
+    clearTimeout(temporizador);
+  });
+}
+
+// ===== Reloj del lobby (hora de Córdoba) =====
+const horas = document.getElementById("horas");
+const minutos = document.getElementById("minutos");
+
+function actualizarReloj() {
+  const hora = new Date().toLocaleTimeString("es-AR", {
     timeZone: "America/Argentina/Cordoba",
     hour: "2-digit",
     minute: "2-digit",
-    hourCycle: "h23",
+    hour12: false,
   });
-
-  const updateClock = () => {
-    const now = new Date();
-    const parts = clockFormatter.formatToParts(now);
-    const hour = parts.find((part) => part.type === "hour")?.value ?? "00";
-    const minute = parts.find((part) => part.type === "minute")?.value ?? "00";
-    if (clockHours) clockHours.textContent = hour;
-    if (clockMinutes) clockMinutes.textContent = minute;
-    liveClock.setAttribute("datetime", now.toISOString());
-    liveClock.setAttribute(
-      "aria-label",
-      `Hora actual en Córdoba: ${hour}:${minute}`,
-    );
-  };
-
-  updateClock();
-  window.setInterval(updateClock, 1000);
+  const partes = hora.split(":");
+  horas.textContent = partes[0];
+  minutos.textContent = partes[1];
 }
 
-const bookingForm = document.querySelector("[data-booking-form]");
+if (horas) {
+  actualizarReloj();
+  setInterval(actualizarReloj, 1000);
+}
 
-if (bookingForm) {
-  const arrival = bookingForm.elements.llegada;
-  const departure = bookingForm.elements.salida;
-  const guests = bookingForm.elements.huespedes;
-  const roomLinks = document.querySelectorAll("[data-room-link]");
-  const arrivalDisplay = bookingForm.querySelector('[data-date-display="llegada"]');
-  const departureDisplay = bookingForm.querySelector('[data-date-display="salida"]');
-  const toISODate = (date) => {
-    const offset = date.getTimezoneOffset();
-    return new Date(date.getTime() - offset * 60000).toISOString().slice(0, 10);
-  };
-  const toDisplayDate = (isoValue) => {
-    if (!isoValue) return "";
-    const [year, month, day] = isoValue.split("-");
-    return `${day}/${month}/${year}`;
-  };
-  const addDays = (date, days) => {
-    const next = new Date(date);
-    next.setDate(next.getDate() + days);
-    return next;
-  };
-  const today = new Date();
-  arrival.min = toISODate(today);
-  arrival.value ||= toISODate(addDays(today, 7));
+// ===== Formulario de reserva =====
+const formReserva = document.getElementById("form-reserva");
 
-  const syncDateDisplays = () => {
-    arrivalDisplay.textContent = toDisplayDate(arrival.value);
-    departureDisplay.textContent = toDisplayDate(departure.value);
-  };
+// Date -> "2026-10-16" (el formato que usan los input date)
+function formatoInput(fecha) {
+  const dia = String(fecha.getDate()).padStart(2, "0");
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+  return fecha.getFullYear() + "-" + mes + "-" + dia;
+}
 
-  const syncDeparture = () => {
-    const minimumDeparture = addDays(new Date(`${arrival.value}T12:00:00`), 1);
-    departure.min = toISODate(minimumDeparture);
-    if (!departure.value || departure.value < departure.min) {
-      departure.value = departure.min;
+// "2026-10-16" -> "16/10/2026"
+function formatoPantalla(texto) {
+  return texto.split("-").reverse().join("/");
+}
+
+function sumarDias(fecha, dias) {
+  const nueva = new Date(fecha);
+  nueva.setDate(nueva.getDate() + dias);
+  return nueva;
+}
+
+function actualizarReserva() {
+  const llegada = formReserva.elements.llegada;
+  const salida = formReserva.elements.salida;
+  const huespedes = formReserva.elements.huespedes;
+
+  // La salida tiene que ser al menos un día después de la llegada
+  salida.min = formatoInput(sumarDias(new Date(llegada.value + "T12:00"), 1));
+  if (salida.value < salida.min) salida.value = salida.min;
+
+  document.getElementById("texto-llegada").textContent = formatoPantalla(llegada.value);
+  document.getElementById("texto-salida").textContent = formatoPantalla(salida.value);
+
+  // Cada tarjeta lleva los datos de la reserva a la página de la habitación
+  const datos = new URLSearchParams({
+    llegada: llegada.value,
+    salida: salida.value,
+    huespedes: huespedes.value,
+  });
+  document.querySelectorAll(".tarjeta").forEach(function (tarjeta) {
+    tarjeta.search = datos.toString();
+  });
+}
+
+if (formReserva) {
+  const hoy = new Date();
+  formReserva.elements.llegada.min = formatoInput(hoy);
+  formReserva.elements.llegada.value = formatoInput(sumarDias(hoy, 7));
+  actualizarReserva();
+
+  formReserva.addEventListener("change", actualizarReserva);
+  formReserva.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+    document.getElementById("habitaciones").scrollIntoView({ behavior: "smooth" });
+  });
+}
+
+// ===== Resumen de la reserva en la página de la habitación =====
+const resumen = document.getElementById("resumen-reserva");
+
+if (resumen) {
+  const datos = new URLSearchParams(window.location.search);
+  const llegada = datos.get("llegada");
+  const salida = datos.get("salida");
+  const huespedes = Number(datos.get("huespedes"));
+
+  if (llegada && salida && huespedes) {
+    const opciones = { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" };
+    const desde = new Date(llegada).toLocaleDateString("es-AR", opciones);
+    const hasta = new Date(salida).toLocaleDateString("es-AR", opciones);
+    const textoHuespedes = huespedes === 1 ? "1 huésped" : huespedes + " huéspedes";
+    resumen.textContent = desde + " – " + hasta + " · " + textoHuespedes;
+  }
+}
+
+// ===== Carrusel de fotos =====
+const carrusel = document.querySelector(".carrusel");
+
+if (carrusel) {
+  const fotos = carrusel.querySelectorAll(".carrusel-foto");
+  const puntos = carrusel.querySelectorAll(".puntos button");
+  let fotoActual = 0;
+
+  function mostrarFoto(numero) {
+    // Si se pasa del final vuelve a la primera, y al revés
+    fotoActual = (numero + fotos.length) % fotos.length;
+    for (let i = 0; i < fotos.length; i++) {
+      fotos[i].classList.toggle("activa", i === fotoActual);
+      puntos[i].classList.toggle("activa", i === fotoActual);
     }
-  };
-
-  const syncRoomLinks = () => {
-    const query = new URLSearchParams({
-      llegada: arrival.value,
-      salida: departure.value,
-      huespedes: guests.value,
-    });
-    roomLinks.forEach((link) => {
-      const destination = new URL(
-        link.getAttribute("href"),
-        window.location.href,
-      );
-      destination.search = query.toString();
-      link.href = destination.href;
-    });
-  };
-
-  syncDeparture();
-  syncRoomLinks();
-  syncDateDisplays();
-  arrival.addEventListener("change", () => {
-    syncDeparture();
-    syncRoomLinks();
-    syncDateDisplays();
-  });
-  departure.addEventListener("change", () => {
-    syncRoomLinks();
-    syncDateDisplays();
-  });
-  guests.addEventListener("change", syncRoomLinks);
-  bookingForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    syncRoomLinks();
-    document.querySelector(".rooms")?.scrollIntoView({ behavior: "smooth" });
-  });
-}
-
-const bookingSummary = document.querySelector("[data-booking-summary]");
-
-if (bookingSummary) {
-  const query = new URLSearchParams(window.location.search);
-  const arrival = query.get("llegada");
-  const departure = query.get("salida");
-  const guests = Number(query.get("huespedes"));
-  const dateFormatter = new Intl.DateTimeFormat("es-AR", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-  if (arrival && departure && guests) {
-    const guestLabel = guests === 1 ? "1 huésped" : `${guests} huéspedes`;
-    bookingSummary.textContent = `${dateFormatter.format(new Date(arrival))} – ${dateFormatter.format(new Date(departure))} · ${guestLabel}`;
   }
-}
 
-document.querySelectorAll("[data-carousel]").forEach((carousel) => {
-  const slides = [...carousel.querySelectorAll(".detail-carousel__slide")];
-  const dots = [...carousel.querySelectorAll("[data-carousel-dot]")];
-  let currentSlide = 0;
-
-  const showSlide = (index) => {
-    currentSlide = (index + slides.length) % slides.length;
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("is-active", slideIndex === currentSlide);
-    });
-    dots.forEach((dot, dotIndex) => {
-      const isActive = dotIndex === currentSlide;
-      dot.classList.toggle("is-active", isActive);
-      dot.setAttribute("aria-current", isActive ? "true" : "false");
-    });
-  };
-
-  carousel
-    .querySelector("[data-carousel-prev]")
-    ?.addEventListener("click", () => showSlide(currentSlide - 1));
-  carousel
-    .querySelector("[data-carousel-next]")
-    ?.addEventListener("click", () => showSlide(currentSlide + 1));
-  dots.forEach((dot, index) =>
-    dot.addEventListener("click", () => showSlide(index)),
-  );
-  carousel.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") showSlide(currentSlide - 1);
-    if (event.key === "ArrowRight") showSlide(currentSlide + 1);
+  carrusel.querySelector(".flecha-anterior").addEventListener("click", function () {
+    mostrarFoto(fotoActual - 1);
   });
-  showSlide(0);
-});
-
-const AUTH_USERS_KEY = "lc_users";
-const AUTH_SESSION_KEY = "lc_session";
-
-function getUsers() {
-  try {
-    return JSON.parse(window.localStorage.getItem(AUTH_USERS_KEY)) ?? [];
-  } catch {
-    return [];
-  }
-}
-
-function saveUsers(users) {
-  window.localStorage.setItem(AUTH_USERS_KEY, JSON.stringify(users));
-}
-
-function getSession() {
-  try {
-    return JSON.parse(window.localStorage.getItem(AUTH_SESSION_KEY));
-  } catch {
-    return null;
-  }
-}
-
-function setSession(user) {
-  window.localStorage.setItem(
-    AUTH_SESSION_KEY,
-    JSON.stringify({ nombre: user.nombre, email: user.email }),
-  );
-}
-
-function clearSession() {
-  window.localStorage.removeItem(AUTH_SESSION_KEY);
-}
-
-function setFieldError(form, fieldName, hasError) {
-  form
-    .querySelector(`[data-login-field="${fieldName}"], [data-register-field="${fieldName}"]`)
-    ?.classList.toggle("login-field--error", hasError);
-}
-
-function showFormError(errorElement, message) {
-  if (!errorElement) return;
-  errorElement.textContent = message;
-  errorElement.hidden = !message;
-}
-
-function getRedirectDestination() {
-  const target = new URLSearchParams(window.location.search).get("redirect");
-  return target && /^[a-zA-Z0-9_-]+\.html$/.test(target) ? target : "lobby.html";
-}
-
-const authCrossLink = document.querySelector("[data-auth-cross-link]");
-
-if (authCrossLink) {
-  const redirect = new URLSearchParams(window.location.search).get("redirect");
-  if (redirect) {
-    const url = new URL(authCrossLink.getAttribute("href"), window.location.href);
-    url.searchParams.set("redirect", redirect);
-    authCrossLink.setAttribute("href", `${url.pathname}${url.search}`);
-  }
-}
-
-document.querySelectorAll("[data-auth-link]").forEach((link) => {
-  const session = getSession();
-  if (session) {
-    link.textContent = `Cerrar sesión (${session.nombre.split(" ")[0]})`;
-    link.setAttribute("href", "#");
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      clearSession();
-      window.location.href = "lobby.html";
-    });
-  } else {
-    link.textContent = "Iniciar sesión";
-    link.setAttribute("href", "login.html");
-  }
-});
-
-document.querySelectorAll("[data-requires-auth]").forEach((link) => {
-  link.addEventListener("click", (event) => {
-    if (getSession()) return;
-    event.preventDefault();
-    window.location.href = `login.html?redirect=${link.getAttribute("href")}`;
+  carrusel.querySelector(".flecha-siguiente").addEventListener("click", function () {
+    mostrarFoto(fotoActual + 1);
   });
-});
+  puntos.forEach(function (punto, i) {
+    punto.addEventListener("click", function () {
+      mostrarFoto(i);
+    });
+  });
+  carrusel.addEventListener("keydown", function (evento) {
+    if (evento.key === "ArrowLeft") mostrarFoto(fotoActual - 1);
+    if (evento.key === "ArrowRight") mostrarFoto(fotoActual + 1);
+  });
+}
 
-const loginForm = document.querySelector("[data-login-form]");
+// ===== Usuarios y sesión (se guardan en el localStorage del navegador) =====
+function leerUsuarios() {
+  return JSON.parse(localStorage.getItem("usuarios")) || [];
+}
 
-if (loginForm) {
-  const errorElement = loginForm.querySelector("[data-login-error]");
-  loginForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const email = loginForm.elements.email.value.trim().toLowerCase();
-    const password = loginForm.elements.password.value;
-    setFieldError(loginForm, "email", false);
-    setFieldError(loginForm, "password", false);
-    showFormError(errorElement, "");
+function leerSesion() {
+  return JSON.parse(localStorage.getItem("sesion"));
+}
 
-    const user = getUsers().find((candidate) => candidate.email === email);
-    if (!user || user.password !== password) {
-      setFieldError(loginForm, "email", true);
-      setFieldError(loginForm, "password", true);
-      showFormError(errorElement, "Correo o contraseña incorrectos.");
+function iniciarSesion(usuario) {
+  localStorage.setItem("sesion", JSON.stringify({ nombre: usuario.nombre, email: usuario.email }));
+}
+
+// Después de loguearse vuelve a la página que pidió (ej: login.html?volver=reservas.html).
+// Solo se aceptan nombres de archivo .html de este sitio.
+function paginaSiguiente() {
+  const volver = new URLSearchParams(window.location.search).get("volver");
+  if (/^[\w-]+\.html$/.test(volver)) return volver;
+  return "lobby.html";
+}
+
+const sesion = leerSesion();
+
+// Link del menú: "Iniciar sesión" o "Cerrar sesión (Nombre)"
+const linkSesion = document.getElementById("link-sesion");
+
+if (linkSesion && sesion) {
+  linkSesion.textContent = "Cerrar sesión (" + sesion.nombre.split(" ")[0] + ")";
+  linkSesion.href = "#";
+  linkSesion.addEventListener("click", function (evento) {
+    evento.preventDefault();
+    localStorage.removeItem("sesion");
+    window.location.href = "lobby.html";
+  });
+}
+
+// El botón "Reservar" pide estar logueado
+const botonReservar = document.getElementById("boton-reservar");
+
+if (botonReservar) {
+  botonReservar.addEventListener("click", function (evento) {
+    if (!sesion) {
+      evento.preventDefault();
+      window.location.href = "login.html?volver=reservas.html";
+    }
+  });
+}
+
+// El link entre login y registro conserva a dónde hay que volver
+const linkCuenta = document.getElementById("link-cuenta");
+
+if (linkCuenta) {
+  linkCuenta.href += window.location.search;
+}
+
+// Pinta en rojo los campos con error y muestra el mensaje
+function mostrarError(form, mensaje, campos) {
+  form.querySelectorAll(".campo").forEach(function (campo) {
+    campo.classList.remove("campo-error");
+  });
+  campos.forEach(function (nombre) {
+    form.elements[nombre].parentElement.classList.add("campo-error");
+  });
+  const error = form.querySelector(".mensaje-error");
+  error.textContent = mensaje;
+  error.hidden = false;
+}
+
+// ===== Login =====
+const formLogin = document.getElementById("form-login");
+
+if (formLogin) {
+  formLogin.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+    const email = formLogin.elements.email.value.trim().toLowerCase();
+    const password = formLogin.elements.password.value;
+
+    const usuario = leerUsuarios().find(function (u) {
+      return u.email === email;
+    });
+
+    if (!usuario || usuario.password !== password) {
+      mostrarError(formLogin, "Correo o contraseña incorrectos.", ["email", "password"]);
       return;
     }
 
-    setSession(user);
-    window.location.href = getRedirectDestination();
+    iniciarSesion(usuario);
+    window.location.href = paginaSiguiente();
   });
 }
 
-const registerForm = document.querySelector("[data-register-form]");
+// ===== Registro =====
+const formRegistro = document.getElementById("form-registro");
 
-if (registerForm) {
-  const errorElement = registerForm.querySelector("[data-register-error]");
-  registerForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const nombre = registerForm.elements.nombre.value.trim();
-    const email = registerForm.elements.email.value.trim().toLowerCase();
-    const password = registerForm.elements.password.value;
-    const confirm = registerForm.elements.confirm.value;
-    ["nombre", "email", "password", "confirm"].forEach((field) =>
-      setFieldError(registerForm, field, false),
-    );
-    showFormError(errorElement, "");
+if (formRegistro) {
+  formRegistro.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+    const nombre = formRegistro.elements.nombre.value.trim();
+    const email = formRegistro.elements.email.value.trim().toLowerCase();
+    const password = formRegistro.elements.password.value;
+    const confirmar = formRegistro.elements.confirmar.value;
+    const usuarios = leerUsuarios();
 
-    if (!nombre || !email || !password || !confirm) {
-      showFormError(errorElement, "Completá todos los campos.");
+    if (!nombre || !email || !password || !confirmar) {
+      mostrarError(formRegistro, "Completá todos los campos.", []);
       return;
     }
     if (password.length < 6) {
-      setFieldError(registerForm, "password", true);
-      showFormError(errorElement, "La contraseña debe tener al menos 6 caracteres.");
+      mostrarError(formRegistro, "La contraseña debe tener al menos 6 caracteres.", ["password"]);
       return;
     }
-    if (password !== confirm) {
-      setFieldError(registerForm, "password", true);
-      setFieldError(registerForm, "confirm", true);
-      showFormError(errorElement, "Las contraseñas no coinciden.");
+    if (password !== confirmar) {
+      mostrarError(formRegistro, "Las contraseñas no coinciden.", ["password", "confirmar"]);
       return;
     }
-    if (getUsers().some((candidate) => candidate.email === email)) {
-      setFieldError(registerForm, "email", true);
-      showFormError(errorElement, "Ya existe una cuenta con ese correo.");
+    if (usuarios.some(function (u) { return u.email === email; })) {
+      mostrarError(formRegistro, "Ya existe una cuenta con ese correo.", ["email"]);
       return;
     }
 
-    const user = { nombre, email, password };
-    saveUsers([...getUsers(), user]);
-    setSession(user);
-    window.location.href = getRedirectDestination();
+    const usuario = { nombre: nombre, email: email, password: password };
+    usuarios.push(usuario);
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    iniciarSesion(usuario);
+    window.location.href = paginaSiguiente();
   });
-}
-
-if (body.classList.contains("intro-page")) {
-  const destination = "lobby.html";
-  const enterLink = document.querySelector(".intro__enter");
-  const timer = window.setTimeout(
-    () => (window.location.href = destination),
-    4200,
-  );
-  enterLink?.addEventListener("click", () => window.clearTimeout(timer));
 }

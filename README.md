@@ -1,24 +1,26 @@
 # Las Condes Hotel & Golf Club
 
-Sitio estático basado en las cinco pantallas de Figma.
+Sitio web del hotel hecho con HTML, CSS y JavaScript (sin frameworks).
 
-## Recorrido
+## Páginas
 
-1. `index.html`: portada animada (Frame 1).
-2. `lobby.html`: lobby/reloj (Frame 2).
-3. `nosotros.html`: Sobre nosotros (TV 3).
-4. `reservas.html`: habitaciones y reservas.
-5. `habitacion.html`: detalle de Suite Fairway.
-6. `habitacion-sierra.html`: detalle de Habitación Sierra Deluxe.
-7. `habitacion-presidencial.html`: detalle de Suite Presidencial LC.
+1. `index.html`: portada animada, pasa sola al lobby.
+2. `lobby.html`: lobby con el reloj en hora de Córdoba.
+3. `nosotros.html`: sobre nosotros.
+4. `reservas.html`: formulario de fechas y lista de habitaciones.
+5. `habitacion.html`, `habitacion-sierra.html`, `habitacion-presidencial.html`: detalle de cada habitación con carrusel de fotos.
+6. `login.html` y `registro.html`: inicio de sesión y registro.
 
-## Ejecutar localmente
+## Archivos
 
-Se puede abrir `index.html` directamente o servir la carpeta con cualquier servidor estático.
+- `assets/css/styles.css`: todos los estilos, separados por página.
+- `assets/js/main.js`: menú, reloj, reserva, carrusel y login/registro.
+- `assets/images/`: fotos y logos.
 
-```powershell
-python -m http.server 8000 --directory hotel-web
-```
+Los usuarios y la sesión se guardan en el `localStorage` del navegador (no hay servidor ni base de datos).
 
-Luego visitar `http://localhost:8000`.
-https://hoteleria-g3.vercel.app/
+## Ver el sitio
+
+Abrir `index.html` en el navegador.
+
+Publicado en https://hoteleria-g3.vercel.app/
