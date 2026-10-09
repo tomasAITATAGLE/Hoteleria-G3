@@ -12,111 +12,63 @@
     />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
-  <body class="room-detail-page">
-    <header class="site-header site-header--overlay">
-      <button
-        class="menu-toggle"
-        type="button"
-        aria-label="Abrir menú"
-        aria-controls="site-menu"
-        aria-expanded="false"
-      >
+  <body class="pagina-habitacion">
+    <header class="encabezado encabezado-transparente">
+      <button class="boton-menu" type="button" aria-label="Abrir menú">
         <span></span><span></span><span></span>
       </button>
-      <a class="site-logo" href="lobby.html"
-        ><span class="brand-mark brand-mark--white"></span
-      ></a>
-      <a class="button button--gold" href="reservas.html" data-requires-auth>Reservar</a>
+      <a class="logo" href="lobby.html"><span class="marca marca-blanca"></span></a>
+      <a class="boton boton-dorado" id="boton-reservar" href="reservas.html">Reservar</a>
     </header>
+
     <main>
-      <section
-        class="detail-carousel"
-        data-carousel
-        aria-label="Galería de Suite Presidencial LC"
-      >
-        <div class="detail-carousel__track">
-          <figure class="detail-carousel__slide is-active">
-            <img
-              src="assets/images/room-presidential-lc.png"
-              alt="Dormitorio de Suite Presidencial LC"
-            />
-          </figure>
-          <figure class="detail-carousel__slide">
-            <img
-              src="assets/images/room-presidential-lounge.png"
-              alt="Salón privado con hogar de Suite Presidencial LC"
-            />
-          </figure>
-          <figure class="detail-carousel__slide">
-            <img
-              src="assets/images/room-presidential-bath.png"
-              alt="Baño principal de Suite Presidencial LC"
-            />
-          </figure>
-        </div>
-        <button
-          class="detail-carousel__arrow detail-carousel__arrow--prev"
-          type="button"
-          data-carousel-prev
-          aria-label="Imagen anterior"
-        >
-          ‹
-        </button>
-        <button
-          class="detail-carousel__arrow detail-carousel__arrow--next"
-          type="button"
-          data-carousel-next
-          aria-label="Imagen siguiente"
-        >
-          ›
-        </button>
-        <div class="detail-carousel__dots" aria-label="Elegir imagen">
-          <button
-            class="is-active"
-            type="button"
-            data-carousel-dot="0"
-            aria-label="Ver imagen 1"
-          ></button
-          ><button
-            type="button"
-            data-carousel-dot="1"
-            aria-label="Ver imagen 2"
-          ></button
-          ><button
-            type="button"
-            data-carousel-dot="2"
-            aria-label="Ver imagen 3"
-          ></button>
+      <section class="carrusel">
+        <figure class="carrusel-foto activa">
+          <img src="assets/images/room-presidential-lc.png" alt="Dormitorio de Suite Presidencial LC" />
+        </figure>
+        <figure class="carrusel-foto">
+          <img src="assets/images/room-presidential-lounge.png" alt="Salón privado con hogar de Suite Presidencial LC" />
+        </figure>
+        <figure class="carrusel-foto">
+          <img src="assets/images/room-presidential-bath.png" alt="Baño principal de Suite Presidencial LC" />
+        </figure>
+        <button class="flecha flecha-anterior" type="button" aria-label="Imagen anterior">‹</button>
+        <button class="flecha flecha-siguiente" type="button" aria-label="Imagen siguiente">›</button>
+        <div class="puntos">
+          <button class="activa" type="button" aria-label="Ver imagen 1"></button>
+          <button type="button" aria-label="Ver imagen 2"></button>
+          <button type="button" aria-label="Ver imagen 3"></button>
         </div>
       </section>
-      <article class="detail container reveal">
-        <nav class="breadcrumb" aria-label="Migas de pan">
-          <a href="lobby.html">Inicio</a><span>›</span
-          ><a href="reservas.html">Habitaciones y Suites</a><span>›</span
-          ><strong>Suite Presidencial LC</strong>
+
+      <article class="detalle contenedor aparecer">
+        <nav class="ruta">
+          <a href="lobby.html">Inicio</a>
+          <span>›</span>
+          <a href="reservas.html">Habitaciones y Suites</a>
+          <span>›</span>
+          <strong>Suite Presidencial LC</strong>
         </nav>
-        <div class="detail__heading">
+        <div class="detalle-cabecera">
           <div>
-            <p class="eyebrow eyebrow--gold">
-              La máxima expresión de Las Condes
-            </p>
+            <p class="subtitulo subtitulo-dorado">La máxima expresión de Las Condes</p>
             <h1>Suite Presidencial LC</h1>
             <p>78 m² · Cama king · Hasta 4 huéspedes</p>
           </div>
-          <div class="detail__price">
-            <strong>$310.000</strong><small>por noche</small
-            ><small data-booking-summary
-              >Seleccioná las fechas de tu estadía</small
-            ><a class="button button--dark" href="reservas.html">Seleccionar</a>
+          <div class="precio">
+            <strong>$310.000</strong>
+            <small>por noche</small>
+            <small id="resumen-reserva">Seleccioná las fechas de tu estadía</small>
+            <a class="boton boton-oscuro" href="reservas.html">Seleccionar</a>
           </div>
         </div>
-        <p class="detail__copy">
+        <p class="detalle-texto">
           La suite más distinguida del hotel reúne dormitorio, salón privado y
           hogar de piedra frente a una vista panorámica del golf y las sierras.
           Materiales nobles, amplitud y servicio personalizado definen una
           experiencia reservada para ocasiones excepcionales.
         </p>
-        <ul class="detail__amenities" aria-label="Servicios incluidos">
+        <ul class="detalle-servicios">
           <li>Salón privado con hogar a leña</li>
           <li>Desayuno y minibar incluidos</li>
           <li>Terraza panorámica</li>
@@ -124,23 +76,20 @@
         </ul>
       </article>
     </main>
-    <footer class="footer-tagline">Elegancia. Exclusividad. Tradición.</footer>
-    <div class="menu-backdrop" data-menu-close></div>
-    <nav class="drawer" id="site-menu" aria-label="Navegación principal">
-      <button
-        class="drawer__close"
-        type="button"
-        data-menu-close
-        aria-label="Cerrar menú"
-      >
-        ×
-      </button>
-      <p class="drawer__eyebrow">Las Condes</p>
-      <a href="lobby.html">Inicio</a><a href="nosotros.html">Sobre nosotros</a
-      ><a href="reservas.html">Habitaciones</a
-      ><a href="#" aria-disabled="true">Contacto</a
-      ><a href="login.html" data-auth-link>Iniciar sesión</a>
+
+    <footer class="pie">Elegancia. Exclusividad. Tradición.</footer>
+
+    <div class="fondo-menu"></div>
+    <nav class="menu">
+      <button class="cerrar-menu" type="button" aria-label="Cerrar menú">×</button>
+      <p class="menu-titulo">Las Condes</p>
+      <a href="lobby.html">Inicio</a>
+      <a href="nosotros.html">Sobre nosotros</a>
+      <a href="reservas.html">Habitaciones</a>
+      <a href="#" aria-disabled="true">Contacto</a>
+      <a href="login.html" id="link-sesion">Iniciar sesión</a>
     </nav>
+
     <script src="assets/js/main.js"></script>
   </body>
 </html>

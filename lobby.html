@@ -13,51 +13,37 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
-    <div class="page page--lobby">
-      <header class="site-header">
-        <button
-          class="menu-toggle"
-          type="button"
-          aria-label="Abrir menú"
-          aria-controls="site-menu"
-          aria-expanded="false"
-        >
+    <div class="pagina-lobby">
+      <header class="encabezado">
+        <button class="boton-menu" type="button" aria-label="Abrir menú">
           <span></span><span></span><span></span>
         </button>
-        <a class="site-logo" href="lobby.html" aria-label="Las Condes, inicio">
-          <span class="brand-mark brand-mark--white"></span>
-        </a>
-        <a class="button button--gold" href="reservas.html" data-requires-auth>Reservar</a>
+        <a class="logo" href="lobby.html"><span class="marca marca-blanca"></span></a>
+        <a class="boton boton-dorado" id="boton-reservar" href="reservas.html">Reservar</a>
       </header>
-      <main class="lobby-content reveal">
-        <p class="eyebrow eyebrow--light">
-          Hora en Las Condes Hotel & Golf Club
+
+      <main class="lobby-contenido aparecer">
+        <p class="subtitulo subtitulo-claro">Hora en Las Condes Hotel & Golf Club</p>
+        <p class="reloj">
+          <span id="horas">11</span>
+          <span class="reloj-separador">:</span>
+          <span id="minutos">43</span>
         </p>
-        <time class="lobby-time" data-live-clock datetime=""
-          ><span data-clock-hours>11</span
-          ><span class="lobby-time__separator" aria-hidden="true">:</span
-          ><span data-clock-minutes>43</span></time
-        >
-        <a class="lobby-cta" href="reservas.html">Reservá tu estadía</a>
+        <a class="lobby-boton" href="reservas.html">Reservá tu estadía</a>
       </main>
     </div>
-    <div class="menu-backdrop" data-menu-close></div>
-    <nav class="drawer" id="site-menu" aria-label="Navegación principal">
-      <button
-        class="drawer__close"
-        type="button"
-        data-menu-close
-        aria-label="Cerrar menú"
-      >
-        ×
-      </button>
-      <p class="drawer__eyebrow">Las Condes</p>
+
+    <div class="fondo-menu"></div>
+    <nav class="menu">
+      <button class="cerrar-menu" type="button" aria-label="Cerrar menú">×</button>
+      <p class="menu-titulo">Las Condes</p>
       <a href="lobby.html">Inicio</a>
       <a href="nosotros.html">Sobre nosotros</a>
       <a href="reservas.html">Habitaciones</a>
       <a href="#" aria-disabled="true">Contacto</a>
-      <a href="login.html" data-auth-link>Iniciar sesión</a>
+      <a href="login.html" id="link-sesion">Iniciar sesión</a>
     </nav>
+
     <script src="assets/js/main.js"></script>
   </body>
 </html>

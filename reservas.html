@@ -12,43 +12,36 @@
     />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
-  <body class="reservations-page">
-    <header class="site-header">
-      <button
-        class="menu-toggle"
-        type="button"
-        aria-label="Abrir menú"
-        aria-controls="site-menu"
-        aria-expanded="false"
-      >
+  <body class="pagina-reservas">
+    <header class="encabezado">
+      <button class="boton-menu" type="button" aria-label="Abrir menú">
         <span></span><span></span><span></span>
       </button>
-      <a class="site-logo" href="lobby.html"
-        ><span class="brand-mark brand-mark--white"></span
-      ></a>
-      <a class="button button--gold" href="reservas.html" data-requires-auth>Reservar</a>
+      <a class="logo" href="lobby.html"><span class="marca marca-blanca"></span></a>
+      <a class="boton boton-dorado" id="boton-reservar" href="reservas.html">Reservar</a>
     </header>
+
     <main>
-      <section class="booking-hero">
+      <section class="reserva-cabecera">
         <h1>Reserva tu estadía</h1>
-        <form class="booking-bar" data-booking-form>
+        <form class="barra-reserva" id="form-reserva">
           <label>
             <span>Llegada</span>
-            <span class="date-field">
+            <span class="campo-fecha">
               <input type="date" name="llegada" required />
-              <span class="date-field__value" data-date-display="llegada" aria-hidden="true"></span>
+              <span class="fecha-texto" id="texto-llegada"></span>
             </span>
           </label>
           <label>
             <span>Salida</span>
-            <span class="date-field">
+            <span class="campo-fecha">
               <input type="date" name="salida" required />
-              <span class="date-field__value" data-date-display="salida" aria-hidden="true"></span>
+              <span class="fecha-texto" id="texto-salida"></span>
             </span>
           </label>
           <label>
             <span>Huéspedes</span>
-            <select name="huespedes" aria-label="Cantidad de huéspedes">
+            <select name="huespedes">
               <option value="1">1 adulto</option>
               <option value="2">2 adultos</option>
               <option value="3">3 huéspedes</option>
@@ -58,13 +51,11 @@
           <button type="submit">Buscar</button>
         </form>
       </section>
-      <section class="rooms container" aria-label="Habitaciones disponibles">
-        <a class="room-card" href="habitacion.html" data-room-link>
+
+      <section class="habitaciones contenedor" id="habitaciones">
+        <a class="tarjeta" href="habitacion.html">
           <figure>
-            <img
-              src="assets/images/room-suite-fairway.png"
-              alt="Suite Fairway con vista al campo de golf"
-            />
+            <img src="assets/images/room-suite-fairway.png" alt="Suite Fairway con vista al campo de golf" />
           </figure>
           <div>
             <h2>Suite Fairway</h2>
@@ -72,12 +63,9 @@
             <strong>$185.000 <span>/ noche</span></strong>
           </div>
         </a>
-        <a class="room-card" href="habitacion-sierra.html" data-room-link>
+        <a class="tarjeta" href="habitacion-sierra.html">
           <figure>
-            <img
-              src="assets/images/room-sierra-deluxe.png"
-              alt="Habitación Sierra Deluxe con vista a las sierras"
-            />
+            <img src="assets/images/room-sierra-deluxe.png" alt="Habitación Sierra Deluxe con vista a las sierras" />
           </figure>
           <div>
             <h2>Habitación Sierra Deluxe</h2>
@@ -85,12 +73,9 @@
             <strong>$132.000 <span>/ noche</span></strong>
           </div>
         </a>
-        <a class="room-card" href="habitacion-presidencial.html" data-room-link>
+        <a class="tarjeta" href="habitacion-presidencial.html">
           <figure>
-            <img
-              src="assets/images/room-presidential-lc.png"
-              alt="Suite Presidencial LC con salón y hogar a leña"
-            />
+            <img src="assets/images/room-presidential-lc.png" alt="Suite Presidencial LC con salón y hogar a leña" />
           </figure>
           <div>
             <h2>Suite Presidencial LC</h2>
@@ -100,23 +85,20 @@
         </a>
       </section>
     </main>
-    <footer class="footer-tagline">Elegancia. Exclusividad. Tradición.</footer>
-    <div class="menu-backdrop" data-menu-close></div>
-    <nav class="drawer" id="site-menu" aria-label="Navegación principal">
-      <button
-        class="drawer__close"
-        type="button"
-        data-menu-close
-        aria-label="Cerrar menú"
-      >
-        ×
-      </button>
-      <p class="drawer__eyebrow">Las Condes</p>
-      <a href="lobby.html">Inicio</a><a href="nosotros.html">Sobre nosotros</a
-      ><a href="reservas.html">Habitaciones</a
-      ><a href="#" aria-disabled="true">Contacto</a
-      ><a href="login.html" data-auth-link>Iniciar sesión</a>
+
+    <footer class="pie">Elegancia. Exclusividad. Tradición.</footer>
+
+    <div class="fondo-menu"></div>
+    <nav class="menu">
+      <button class="cerrar-menu" type="button" aria-label="Cerrar menú">×</button>
+      <p class="menu-titulo">Las Condes</p>
+      <a href="lobby.html">Inicio</a>
+      <a href="nosotros.html">Sobre nosotros</a>
+      <a href="reservas.html">Habitaciones</a>
+      <a href="#" aria-disabled="true">Contacto</a>
+      <a href="login.html" id="link-sesion">Iniciar sesión</a>
     </nav>
+
     <script src="assets/js/main.js"></script>
   </body>
 </html>
