@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { rutaLogin, useAuth } from "../context/AuthContext.jsx";
 
 export default function Navbar() {
-  const { usuario } = useAuth();
+  const { usuario, cerrarSesion } = useAuth();
+  const navigate = useNavigate();
   const [abierto, setAbierto] = useState(false);
   const { pathname } = useLocation();
 
@@ -27,6 +28,12 @@ export default function Navbar() {
   useEffect(() => {
     setAbierto(false);
   }, [pathname]);
+
+  function salir(evento) {
+    evento.preventDefault();
+    cerrarSesion();
+    navigate("/lobby");
+  }
 
   const transparente = pathname.startsWith("/habitacion");
 
@@ -73,10 +80,15 @@ export default function Navbar() {
         <a href="#" aria-disabled="true">
           Contacto
         </a>
-        {/* TODO (TDW-12): conectar con useAuth() para mostrar "Cerrar sesión (Nombre)" */}
-        <NavLink to="/login" id="link-sesion">
-          Iniciar sesión
-        </NavLink>
+        {usuario ? (
+          <a href="#" id="link-sesion" onClick={salir}>
+            Cerrar sesión ({usuario.nombre.split(" ")[0]})
+          </a>
+        ) : (
+          <NavLink to="/login" id="link-sesion">
+            Iniciar sesión
+          </NavLink>
+        )}
       </nav>
     </>
   );
