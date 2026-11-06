@@ -548,6 +548,13 @@ img {
 .tarjeta strong span {
   font-weight: 400;
 }
+/* Resumen de la reserva (fechas y huéspedes) */
+.tarjeta small {
+  display: block;
+  margin-top: 6px;
+  color: var(--gris);
+  font-size: 0.58rem;
+}
 
 /* ===== Footer ===== */
 .pie {
