@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext.jsx";
 import Habitacion from "./pages/Habitacion.jsx";
 import Inicio from "./pages/Inicio.jsx";
 import Lobby from "./pages/Lobby.jsx";
@@ -9,16 +10,18 @@ import Reservas from "./pages/Reservas.jsx";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Inicio />} />
-        <Route path="/lobby" element={<Lobby />} />
-        <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/reservas" element={<Reservas />} />
-        <Route path="/habitacion/:id" element={<Habitacion />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registro" element={<Registro />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/lobby" element={<Lobby />} />
+          <Route path="/nosotros" element={<Nosotros />} />
+          <Route path="/reservas" element={<Reservas />} />
+          <Route path="/habitacion/:id" element={<Habitacion />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Registro />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
