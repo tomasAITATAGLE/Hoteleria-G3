@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { rutaVolver, useAuth } from "../context/AuthContext.jsx";
 
@@ -8,6 +8,10 @@ export default function Registro() {
   const [parametros] = useSearchParams();
   const [datos, setDatos] = useState({ nombre: "", email: "", password: "", confirmar: "" });
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    document.title = "Crear cuenta — Las Condes";
+  }, []);
 
   function cambiar(evento) {
     setDatos({ ...datos, [evento.target.name]: evento.target.value });
