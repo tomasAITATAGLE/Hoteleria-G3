@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Habitaciones & Suites — Las Condes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="pagina-reservas">
+    <header class="encabezado">
+      <button class="boton-menu" type="button" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="logo" href="lobby.html"><span class="marca marca-blanca"></span></a>
+      <a class="boton boton-dorado" id="boton-reservar" href="reservas.html">Reservar</a>
+    </header>
+
+    <main>
+      <section class="reserva-cabecera">
+        <h1>Reserva tu estadía</h1>
+        <form class="barra-reserva" id="form-reserva">
+          <label>
+            <span>Llegada</span>
+            <span class="campo-fecha">
+              <input type="date" name="llegada" required />
+              <span class="fecha-texto" id="texto-llegada"></span>
+            </span>
+          </label>
+          <label>
+            <span>Salida</span>
+            <span class="campo-fecha">
+              <input type="date" name="salida" required />
+              <span class="fecha-texto" id="texto-salida"></span>
+            </span>
+          </label>
+          <label>
+            <span>Huéspedes</span>
+            <select name="huespedes">
+              <option value="1">1 adulto</option>
+              <option value="2">2 adultos</option>
+              <option value="3">3 huéspedes</option>
+              <option value="4">4 huéspedes</option>
+            </select>
+          </label>
+          <button type="submit">Buscar</button>
+        </form>
+      </section>
+
+      <section class="habitaciones contenedor" id="habitaciones">
+        <a class="tarjeta" href="habitacion.html">
+          <figure>
+            <img src="assets/images/room-suite-fairway.png" alt="Suite Fairway con vista al campo de golf" />
+          </figure>
+          <div>
+            <h2>Suite Fairway</h2>
+            <p>Vista al green · 45 m²</p>
+            <strong>$185.000 <span>/ noche</span></strong>
+          </div>
+        </a>
+        <a class="tarjeta" href="habitacion-sierra.html">
+          <figure>
+            <img src="assets/images/room-sierra-deluxe.png" alt="Habitación Sierra Deluxe con vista a las sierras" />
+          </figure>
+          <div>
+            <h2>Habitación Sierra Deluxe</h2>
+            <p>Vista a las sierras · 32 m²</p>
+            <strong>$132.000 <span>/ noche</span></strong>
+          </div>
+        </a>
+        <a class="tarjeta" href="habitacion-presidencial.html">
+          <figure>
+            <img src="assets/images/room-presidential-lc.png" alt="Suite Presidencial LC con salón y hogar a leña" />
+          </figure>
+          <div>
+            <h2>Suite Presidencial LC</h2>
+            <p>Vista panorámica · 78 m²</p>
+            <strong>$310.000 <span>/ noche</span></strong>
+          </div>
+        </a>
+      </section>
+    </main>
+
+    <footer class="pie">Elegancia. Exclusividad. Tradición.</footer>
+
+    <div class="fondo-menu"></div>
+    <nav class="menu">
+      <button class="cerrar-menu" type="button" aria-label="Cerrar menú">×</button>
+      <p class="menu-titulo">Las Condes</p>
+      <a href="lobby.html">Inicio</a>
+      <a href="nosotros.html">Sobre nosotros</a>
+      <a href="reservas.html">Habitaciones</a>
+      <a href="#" aria-disabled="true">Contacto</a>
+      <a href="login.html" id="link-sesion">Iniciar sesión</a>
+    </nav>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

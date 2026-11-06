@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Las Condes — Bienvenida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="pagina-lobby">
+      <header class="encabezado">
+        <button class="boton-menu" type="button" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+        <a class="logo" href="lobby.html"><span class="marca marca-blanca"></span></a>
+        <a class="boton boton-dorado" id="boton-reservar" href="reservas.html">Reservar</a>
+      </header>
+
+      <main class="lobby-contenido aparecer">
+        <p class="subtitulo subtitulo-claro">Hora en Las Condes Hotel & Golf Club</p>
+        <p class="reloj">
+          <span id="horas">11</span>
+          <span class="reloj-separador">:</span>
+          <span id="minutos">43</span>
+        </p>
+        <a class="lobby-boton" href="reservas.html">Reservá tu estadía</a>
+      </main>
+    </div>
+
+    <div class="fondo-menu"></div>
+    <nav class="menu">
+      <button class="cerrar-menu" type="button" aria-label="Cerrar menú">×</button>
+      <p class="menu-titulo">Las Condes</p>
+      <a href="lobby.html">Inicio</a>
+      <a href="nosotros.html">Sobre nosotros</a>
+      <a href="reservas.html">Habitaciones</a>
+      <a href="#" aria-disabled="true">Contacto</a>
+      <a href="login.html" id="link-sesion">Iniciar sesión</a>
+    </nav>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

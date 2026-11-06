@@ -1,0 +1,30 @@
+# Normaliza automáticamente los finales de línea de archivos de texto a LF,
+# sin importar el SO desde el que se edite o clone el repo.
+* text=auto eol=lf
+
+# Tipos de texto explícitos
+*.html  text eol=lf
+*.css   text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+# Windows scripts: se dejan con su final de línea nativo
+*.ps1   text eol=crlf
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
+# Binarios: nunca tocar
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
