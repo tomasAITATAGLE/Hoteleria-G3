@@ -21,6 +21,11 @@ export function rutaVolver(volver) {
   return esInterna ? volver : "/lobby";
 }
 
+// Login que, al terminar, vuelve a "destino" (ej: rutaLogin("/reservas") -> /login?volver=%2Freservas)
+export function rutaLogin(destino) {
+  return "/login?" + new URLSearchParams({ volver: destino });
+}
+
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
