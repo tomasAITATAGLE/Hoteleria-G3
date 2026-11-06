@@ -44,59 +44,57 @@ export default function Registro() {
   }
 
   return (
-    <div className="pagina-login">
-      <main className="login-contenido">
-        <section className="login-tarjeta aparecer">
-          <p className="subtitulo subtitulo-dorado">Las Condes</p>
-          <h1>Crear cuenta</h1>
-          <p className="login-texto">Registrate para reservar y gestionar tu estadía.</p>
+    <main className="login-contenido">
+      <section className="login-tarjeta aparecer">
+        <p className="subtitulo subtitulo-dorado">Las Condes</p>
+        <h1>Crear cuenta</h1>
+        <p className="login-texto">Registrate para reservar y gestionar tu estadía.</p>
 
-          <form onSubmit={enviar} autoComplete="off" noValidate>
-            {error && <p className="mensaje-error">{error.mensaje}</p>}
-            <label className={claseCampo("nombre")}>
-              <span>Nombre completo</span>
-              <input type="text" name="nombre" placeholder="Tu nombre" value={datos.nombre} onChange={cambiar} />
-            </label>
-            <label className={claseCampo("email")}>
-              <span>Correo electrónico</span>
-              <input
-                type="email"
-                name="email"
-                placeholder="nombre@correo.com"
-                value={datos.email}
-                onChange={cambiar}
-              />
-            </label>
-            <label className={claseCampo("password")}>
-              <span>Contraseña</span>
-              <input
-                type="password"
-                name="password"
-                placeholder="Mínimo 6 caracteres"
-                value={datos.password}
-                onChange={cambiar}
-              />
-            </label>
-            <label className={claseCampo("confirmar")}>
-              <span>Confirmar contraseña</span>
-              <input
-                type="password"
-                name="confirmar"
-                placeholder="••••••••"
-                value={datos.confirmar}
-                onChange={cambiar}
-              />
-            </label>
-            <button className="boton-enviar" type="submit">
-              Crear cuenta
-            </button>
-          </form>
+        <form onSubmit={enviar} autoComplete="off" noValidate>
+          {error && <p className="mensaje-error">{error.mensaje}</p>}
+          <label className={claseCampo("nombre")}>
+            <span>Nombre completo</span>
+            <input type="text" name="nombre" placeholder="Tu nombre" value={datos.nombre} onChange={cambiar} />
+          </label>
+          <label className={claseCampo("email")}>
+            <span>Correo electrónico</span>
+            <input
+              type="email"
+              name="email"
+              placeholder="nombre@correo.com"
+              value={datos.email}
+              onChange={cambiar}
+            />
+          </label>
+          <label className={claseCampo("password")}>
+            <span>Contraseña</span>
+            <input
+              type="password"
+              name="password"
+              placeholder="Mínimo 6 caracteres"
+              value={datos.password}
+              onChange={cambiar}
+            />
+          </label>
+          <label className={claseCampo("confirmar")}>
+            <span>Confirmar contraseña</span>
+            <input
+              type="password"
+              name="confirmar"
+              placeholder="••••••••"
+              value={datos.confirmar}
+              onChange={cambiar}
+            />
+          </label>
+          <button className="boton-enviar" type="submit">
+            Crear cuenta
+          </button>
+        </form>
 
-          <p className="login-pie">
-            ¿Ya tenés cuenta? <Link to={{ pathname: "/login", search: parametros.toString() }}>Iniciar sesión</Link>
-          </p>
-        </section>
-      </main>
-    </div>
+        <p className="login-pie">
+          ¿Ya tenés cuenta? <Link to={{ pathname: "/login", search: parametros.toString() }}>Iniciar sesión</Link>
+        </p>
+      </section>
+    </main>
   );
 }

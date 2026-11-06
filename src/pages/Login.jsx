@@ -27,51 +27,49 @@ export default function Login() {
   }
 
   return (
-    <div className="pagina-login">
-      <main className="login-contenido">
-        <section className="login-tarjeta aparecer">
-          <p className="subtitulo subtitulo-dorado">Las Condes</p>
-          <h1>Iniciar sesión</h1>
-          <p className="login-texto">Accedé a tu cuenta para gestionar tus reservas.</p>
+    <main className="login-contenido">
+      <section className="login-tarjeta aparecer">
+        <p className="subtitulo subtitulo-dorado">Las Condes</p>
+        <h1>Iniciar sesión</h1>
+        <p className="login-texto">Accedé a tu cuenta para gestionar tus reservas.</p>
 
-          <form onSubmit={enviar} autoComplete="off" noValidate>
-            {error && <p className="mensaje-error">{error.mensaje}</p>}
-            <label className={claseCampo("email")}>
-              <span>Correo electrónico</span>
-              <input
-                type="email"
-                name="email"
-                placeholder="nombre@correo.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+        <form onSubmit={enviar} autoComplete="off" noValidate>
+          {error && <p className="mensaje-error">{error.mensaje}</p>}
+          <label className={claseCampo("email")}>
+            <span>Correo electrónico</span>
+            <input
+              type="email"
+              name="email"
+              placeholder="nombre@correo.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label className={claseCampo("password")}>
+            <span>Contraseña</span>
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <div className="login-opciones">
+            <label>
+              <input type="checkbox" name="recordarme" /> Recordarme
             </label>
-            <label className={claseCampo("password")}>
-              <span>Contraseña</span>
-              <input
-                type="password"
-                name="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-            <div className="login-opciones">
-              <label>
-                <input type="checkbox" name="recordarme" /> Recordarme
-              </label>
-              <a href="#">¿Olvidaste tu contraseña?</a>
-            </div>
-            <button className="boton-enviar" type="submit">
-              Ingresar
-            </button>
-          </form>
+            <a href="#">¿Olvidaste tu contraseña?</a>
+          </div>
+          <button className="boton-enviar" type="submit">
+            Ingresar
+          </button>
+        </form>
 
-          <p className="login-pie">
-            ¿No tenés cuenta? <Link to={{ pathname: "/registro", search: parametros.toString() }}>Creá una aquí</Link>
-          </p>
-        </section>
-      </main>
-    </div>
+        <p className="login-pie">
+          ¿No tenés cuenta? <Link to={{ pathname: "/registro", search: parametros.toString() }}>Creá una aquí</Link>
+        </p>
+      </section>
+    </main>
   );
 }
