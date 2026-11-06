@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const servicios = [
   "Campo de golf de 18 hoyos",
   "Spa y circuito de aguas",
@@ -27,6 +29,10 @@ function Adorno() {
 }
 
 export default function Nosotros() {
+  useEffect(() => {
+    document.title = "Sobre nosotros — Las Condes";
+  }, []);
+
   return (
     <main className="nosotros contenedor aparecer">
       <Titulo>Sobre nosotros</Titulo>

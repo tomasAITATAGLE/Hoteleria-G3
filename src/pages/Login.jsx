@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { rutaVolver, useAuth } from "../context/AuthContext.jsx";
 
@@ -9,6 +9,10 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    document.title = "Iniciar sesión — Las Condes";
+  }, []);
 
   function enviar(evento) {
     evento.preventDefault();
