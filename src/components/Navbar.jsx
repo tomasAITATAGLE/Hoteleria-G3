@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { rutaLogin, useAuth } from "../context/AuthContext.jsx";
 
 export default function Navbar() {
+  const { usuario } = useAuth();
   const [abierto, setAbierto] = useState(false);
   const { pathname } = useLocation();
 
@@ -44,7 +46,12 @@ export default function Navbar() {
         <Link className="logo" to="/lobby">
           <span className="marca marca-blanca"></span>
         </Link>
-        <Link className="boton boton-dorado" id="boton-reservar" to="/reservas">
+        {/* Reservar pide estar logueado: sin sesión pasa por el login y después vuelve a /reservas */}
+        <Link
+          className="boton boton-dorado"
+          id="boton-reservar"
+          to={usuario ? "/reservas" : rutaLogin("/reservas")}
+        >
           Reservar
         </Link>
       </header>
