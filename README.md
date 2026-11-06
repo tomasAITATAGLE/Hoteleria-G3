@@ -1,26 +1,50 @@
 # Las Condes Hotel & Golf Club
 
-Sitio web del hotel hecho con HTML, CSS y JavaScript (sin frameworks).
+Sitio web del hotel. Se está migrando de HTML, CSS y JavaScript plano a React.
 
-## Páginas
+## Cómo correrlo
 
-1. `index.html`: portada animada, pasa sola al lobby.
-2. `lobby.html`: lobby con el reloj en hora de Córdoba.
-3. `nosotros.html`: sobre nosotros.
-4. `reservas.html`: formulario de fechas y lista de habitaciones.
-5. `habitacion.html`, `habitacion-sierra.html`, `habitacion-presidencial.html`: detalle de cada habitación con carrusel de fotos.
-6. `login.html` y `registro.html`: inicio de sesión y registro.
+```bash
+npm install
+npm run dev
+```
 
-## Archivos
+Se abre en `http://localhost:5173`.
 
-- `assets/css/styles.css`: todos los estilos, separados por página.
-- `assets/js/main.js`: menú, reloj, reserva, carrusel y login/registro.
-- `assets/images/`: fotos y logos.
+Para generar la versión final:
+
+```bash
+npm run build
+```
+
+## Tecnologías
+
+- Vite
+- React 18
+- react-router-dom 6
+
+## Estructura
+
+- `src/pages/`: una página por ruta.
+- `src/components/`: componentes reutilizables.
+- `src/context/`: contextos de React (por ejemplo, la sesión del usuario).
+- `src/data/`: datos del sitio (habitaciones, etc.).
+- `src/styles.css`: estilos de todo el sitio.
+- `public/images/`: fotos y logos.
+- `legacy/`: el sitio anterior en HTML plano, solo para consultar mientras dura la migración.
+
+## Rutas
+
+| Ruta | Página |
+| --- | --- |
+| `/` | Portada |
+| `/lobby` | Lobby |
+| `/nosotros` | Sobre nosotros |
+| `/reservas` | Reservas |
+| `/habitacion/:id` | Detalle de una habitación |
+| `/login` | Iniciar sesión |
+| `/registro` | Crear cuenta |
 
 Los usuarios y la sesión se guardan en el `localStorage` del navegador (no hay servidor ni base de datos).
-
-## Ver el sitio
-
-Abrir `index.html` en el navegador.
 
 Publicado en https://hoteleria-g3.vercel.app/
