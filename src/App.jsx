@@ -2,10 +2,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import Layout from "./components/Layout.jsx";
 import Habitacion from "./pages/Habitacion.jsx";
-import Inicio from "./pages/Inicio.jsx";
 import Lobby from "./pages/Lobby.jsx";
 import Login from "./pages/Login.jsx";
 import Nosotros from "./pages/Nosotros.jsx";
+import Portada from "./pages/Portada.jsx";
 import Registro from "./pages/Registro.jsx";
 import Reservas from "./pages/Reservas.jsx";
 
@@ -14,7 +14,7 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Inicio />} />
+          <Route path="/" element={<Portada />} />
           <Route element={<Layout />}>
             <Route path="/lobby" element={<Lobby />} />
             <Route path="/nosotros" element={<Nosotros />} />
