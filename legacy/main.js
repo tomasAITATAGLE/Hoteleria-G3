@@ -282,7 +282,7 @@ if (formRegistro) {
 
     const usuario = { nombre: nombre, email: email, password: password };
     usuarios.push(usuario);
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    localStorage.setItem("usuarios",  JSON.stringify(usuarios));
     iniciarSesion(usuario);
     window.location.href = paginaSiguiente();
   });
