@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext.jsx";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { rutaVolver, useAuth } from "../context/AuthContext.jsx";
 
 export default function Login() {
   const { iniciarSesion } = useAuth();
   const navigate = useNavigate();
+  const [parametros] = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -18,7 +19,7 @@ export default function Login() {
       return;
     }
 
-    navigate("/lobby");
+    navigate(rutaVolver(parametros.get("volver")), { replace: true });
   }
 
   function claseCampo(nombre) {
@@ -67,7 +68,7 @@ export default function Login() {
           </form>
 
           <p className="login-pie">
-            ¿No tenés cuenta? <Link to="/registro">Creá una aquí</Link>
+            ¿No tenés cuenta? <Link to={{ pathname: "/registro", search: parametros.toString() }}>Creá una aquí</Link>
           </p>
         </section>
       </main>

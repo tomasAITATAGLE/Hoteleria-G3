@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext.jsx";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { rutaVolver, useAuth } from "../context/AuthContext.jsx";
 
 export default function Registro() {
   const { registrar } = useAuth();
   const navigate = useNavigate();
+  const [parametros] = useSearchParams();
   const [datos, setDatos] = useState({ nombre: "", email: "", password: "", confirmar: "" });
   const [error, setError] = useState(null);
 
@@ -35,7 +36,7 @@ export default function Registro() {
       return;
     }
 
-    navigate("/lobby");
+    navigate(rutaVolver(parametros.get("volver")), { replace: true });
   }
 
   function claseCampo(nombre) {
@@ -92,7 +93,7 @@ export default function Registro() {
           </form>
 
           <p className="login-pie">
-            ¿Ya tenés cuenta? <Link to="/login">Iniciar sesión</Link>
+            ¿Ya tenés cuenta? <Link to={{ pathname: "/login", search: parametros.toString() }}>Iniciar sesión</Link>
           </p>
         </section>
       </main>

@@ -10,6 +10,17 @@ function leer(clave, valorPorDefecto) {
   }
 }
 
+// Después de loguearse se vuelve a la página pedida (ej: /login?volver=/reservas).
+// Solo se aceptan rutas internas del sitio; cualquier otra cosa lleva al lobby.
+export function rutaVolver(volver) {
+  const esInterna =
+    typeof volver === "string" &&
+    volver.startsWith("/") &&
+    !volver.startsWith("//") &&
+    !volver.includes("\\");
+  return esInterna ? volver : "/lobby";
+}
+
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
